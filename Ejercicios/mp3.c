@@ -17,9 +17,8 @@ int main() {
 		printf("Despierto");
 		
   	} else {
-  	
-  		wait(NULL);
   		pid2 = fork();
+  		wait(NULL);
   		
   		if(pid2 == 0){
   			printf("Soy el proceso P3. mi pid es = %d, el pid de mi padre es = %d\n", getpid(), getppid()); 		
