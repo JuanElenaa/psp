@@ -27,7 +27,7 @@ int main() {
     
         close(pipefd[0]);
 
-        
+        srand(time(NULL));
         int num1 = rand() % 50 + 1;
         int num2 = rand() % 50 + 1;
 
