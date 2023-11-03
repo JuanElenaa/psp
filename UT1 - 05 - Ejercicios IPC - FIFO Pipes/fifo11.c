@@ -34,7 +34,8 @@ int main() {
     // Cerrar el descriptor
     close(fd1);
     close(fd2);
-    
+    unlink("FIFO1");
+    unlink("FIFO2");
 
     return 0;
 }
