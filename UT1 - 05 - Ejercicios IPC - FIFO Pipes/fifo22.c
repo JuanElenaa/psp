@@ -28,6 +28,6 @@ int main() {
 
     // Cerrar el descriptor
     close(fdw);
-
+    unlink("FIFO1"); 
     return 0;
 }
