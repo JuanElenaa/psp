@@ -33,6 +33,7 @@ int main() {
     printf("Factorial de %d es %d\n", num, fact);
 
     // Cerrar el descriptor
+    unlink("FIFO1"); 
     close(fdr);
 
     return 0;
