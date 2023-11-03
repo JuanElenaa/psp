@@ -16,7 +16,7 @@ int main() {
     srand(time(NULL));
     int num = rand() % 11;
 
-    printf("fifo11: Número aleatorio generado: %d\n", num);
+    printf("Número aleatorio generado: %d\n", num);
 
     // Escribir el número en el pipe FIFO1
     write(fd1, &num, sizeof(int));
