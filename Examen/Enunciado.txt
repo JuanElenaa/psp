@@ -276,7 +276,108 @@ public class SocketClientBolsa {
     }
 }
 
+NUEVA CLASE SERVER
 
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+class AccionBolsa implements Serializable {
+    private String nombreAccion;
+    private String codigoAccion;
+    private double valorActual;
+    private double valorMinimo;
+    private double valorMaximo;
+
+    public AccionBolsa(String nombreAccion, String codigoAccion, double valorActual, double valorMinimo, double valorMaximo) {
+        this.nombreAccion = nombreAccion;
+        this.codigoAccion = codigoAccion;
+        this.valorActual = valorActual;
+        this.valorMinimo = valorMinimo;
+        this.valorMaximo = valorMaximo;
+    }
+
+    public String getNombreAccion() {
+        return nombreAccion;
+    }
+
+    public String getCodigoAccion() {
+        return codigoAccion;
+    }
+
+    public double getValorActual() {
+        return valorActual;
+    }
+
+    public double getValorMinimo() {
+        return valorMinimo;
+    }
+
+    public double getValorMaximo() {
+        return valorMaximo;
+    }
+}
+
+public class SocketServerBolsa {
+    public static void main(String[] args) throws Exception {
+        ArrayList<AccionBolsa> listaAcciones = new ArrayList<>();
+        listaAcciones.add(new AccionBolsa("Banco Bilbao Vizcaya", "BBVA", 9.286, 9.110, 9.296));
+        listaAcciones.add(new AccionBolsa("Banco Santander", "SANT", 3.824, 3.782, 3.849));
+        listaAcciones.add(new AccionBolsa("Iberdrola", "IBER", 10.965, 10.855, 10.980));
+        listaAcciones.add(new AccionBolsa("Repsol", "REPS", 13.620, 13.480, 13.670));
+
+        try (ServerSocket serverSocket = new ServerSocket(12345)) {
+            System.out.println("Servidor Bolsa preparado...");
+
+            while (true) {
+                try (Socket clientSocket = serverSocket.accept();
+                     ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+                     ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
+
+                    String codigoAccion = (String) in.readObject();
+                    System.out.println("Codigo de accion bursatil: " + codigoAccion);
+
+                    AccionBolsa accion = buscarAccion(listaAcciones, codigoAccion);
+
+                    if (accion != null) {
+                        int opcion;
+                        do {
+                            System.out.println("¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir)?: ");
+                            opcion = (int) in.readObject();
+
+                            switch (opcion) {
+                                case 1:
+                                    out.writeObject("Valor Actual: " + accion.getValorActual());
+                                    break;
+                                case 2:
+                                    out.writeObject("Valor Minimo: " + accion.getValorMinimo());
+                                    break;
+                                case 3:
+                                    out.writeObject("Valor Maximo: " + accion.getValorMaximo());
+                                    break;
+                            }
+
+                        } while (opcion != 4);
+
+                    } else {
+                        out.writeObject("La acción con código " + codigoAccion + " no fue encontrada.");
+                    }
+                }
+            }
+        }
+    }
+
+    private static AccionBolsa buscarAccion(ArrayList<AccionBolsa> acciones, String codigo) {
+        for (AccionBolsa accion : acciones) {
+            if (accion.getCodigoAccion().equals(codigo)) {
+                return accion;
+            }
+        }
+        return null; // Si no se encuentra la acción
+    }
+}
+
+AHORA SI FUNCIONA :D
 
 
 
