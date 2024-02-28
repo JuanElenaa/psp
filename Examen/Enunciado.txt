@@ -239,7 +239,42 @@ NO SE PORQ NO ME FUNCIONA XD, NO DA ERROR PERO NO SALE NADA
 
 A mi tampoco, el cliente es mudo, wa chekal
 
+NUEVA CLASE CLIENTE
 
+import java.io.*;
+import java.net.*;
+
+public class SocketClientBolsa {
+    public static void main(String[] args) throws Exception {
+        try (Socket socket = new Socket("localhost", 12345);
+             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+            while (true) {
+                System.out.print("Codigo de accion bursatil: ");
+                String codigoAccion = reader.readLine();
+                out.writeObject(codigoAccion);
+
+                int opcion;
+                do {
+                    System.out.print("¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir)?: ");
+                    opcion = Integer.parseInt(reader.readLine());
+                    out.writeObject(opcion);
+
+                    String respuesta = (String) in.readObject();
+                    System.out.println(respuesta);
+
+                } while (opcion != 4);
+
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 
 
