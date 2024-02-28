@@ -237,6 +237,7 @@ public class SocketClientBolsa {
 
 NO SE PORQ NO ME FUNCIONA XD, NO DA ERROR PERO NO SALE NADA
 
+A mi tampoco, el cliente es mudo, wa chekal
 
 
 
