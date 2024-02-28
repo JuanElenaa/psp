@@ -1,1 +1,108 @@
+ *Implemetar dos procesos java que se comunicaran entre si 
+ * utilizando objetos sobre sockets TCP. Uno de los procesos 
+ * realizará la funcion de servidor, mientras que el otro actuara como cliente
+ * 
+ * Proceso servidor SocketServerBolsa.java:
+ *  Tiene implementado el esqueleto de una clase accionbolsa . Implementar los constructores y metodos necesarios
+ *  Se ha definido en el main una lista de valores bursátiles utilizando ArrayList
+ *  Funciona de manera infefinida recibiendo peticiones de consultas por parte del cliente,que realizará las consultas utilizando el codigo de la accion(BBVA, REPS,)
+ *  El servidor realizara la busqueda solicitada  devolvera el cliente un objeto con los resultados
+ * 
+ * 
+ * Proceso cliente SocketClientBolsa.java:
+ *  Solicitará por pantalla el código de la accion a buscar y una opcion con la informacion a buscar
+ *  Recibe por parte del servidor, el objeto con los datos buscados y muestra por pantalla la siguiente información:
+ *      Nombre completo de la accion
+ *      Valor solicitado por el cliente
+ *
+ * ejemplos de ejecucion:
+ * 
+ * SERVIDOR:
+ * Servidor Bolsa preparado...
+ * 
+ * 
+ * CLIENTE
+ * Codigo de accion bursatil: REPS
+ * ¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir) ?: 2
+ * Valor minimo: Repsol = 13.48
+ * 
+ * ¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir) ?: 1
+ * Valor Actual: Repsol = 13.48
+ * 
+ * ¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir) ?: 4
+ * 
+ * 
+ * Codigo de accion bursatil: BBVA
+ * ¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir) ?: 1
+ * Valor minimo: Repsol = 9.286
+ * 
+ * ¿Que informacion desea conocer (1 = ValorActual / 2 = ValorMinimo / 3 = ValorMaximo / 4 = salir) ?: 4
+
+
+
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+//Clase para implementar la acción o el valor bursátil
+class accionbolsa  {
+    private String nombre_accion;
+    private String codigo_accion;
+    private double valor_actual,valor_minimo, valor_maximo;
+   
+    
+    
+  
+}
+
+public class SocketServerBolsa {
+    public static void main(String[] args) throws Exception {
+    
+        ArrayList <accionbolsa>  lista_acciones = new ArrayList<>();
+        lista_acciones.add(new accionbolsa("Banco Bilbao Vizcaya","BBVA",9.286,9.110,9.296));
+        lista_acciones.add(new accionbolsa("Banco Santander","SANT",3.824,3.782,3.849));
+        lista_acciones.add(new accionbolsa("Iberdrola","IBER",10.965,10.855,10.980));
+        lista_acciones.add(new accionbolsa("Repsol","REPS",13.620,13.480,13.670));       
+              
+        
+        while(true) {
+        
+        } // while
+    } // main()
+} // class
+
+
+
+
+
+
+
+
+
+
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class SocketClientBolsa {
+    public static void main(String[] args) throws Exception  {
+
+          
+    } //main
+} //class
+
+
+
+
+
+
+
+
+
+
+
+
+
 
